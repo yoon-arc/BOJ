@@ -1,4 +1,4 @@
-import heapq
+from collections import deque
 #테스트 케이스
 t = int(input())
 for _ in range(t):
@@ -13,27 +13,27 @@ for _ in range(t):
         a,b,s = map(int, input().split())
         computers[b].append((a, s))
 
-    # INF를 사용해 아직 감염되지 않은 상태를 표현
-    INF = 10**9
-    dist = [INF] * (n+1)
-    dist[c] = 0
+    #감염 시간
+    dist = [None] * (n+1)
+    dist[c] = 0    
+    #큐
+    dq = deque([c])
     
-    # heapq를 큐로 사용 ( (감염 시간, 컴퓨터 번호) )
-    heap = [(0, c)]
-    
-    while heap:        
+    while dq:
+        curr = dq.popleft()
         # print(f"현재 컴터는 {curr}")
-        curr_time, curr = heapq.heappop(heap)
-        if curr_time != dist[curr]:
-            continue
         for connected, time in computers[curr]:
-            can_time = curr_time + time  # curr를 통해 connected로 감염되는 시간
-            if can_time < dist[connected]:
+            can_time = dist[curr] + time  # curr를 통해 걸리는 시간
+            #아직 감염되지 않았거나 최적 시간 발견 시
+            if dist[connected] is None or can_time < dist[connected]:
                 dist[connected] = can_time
-                heapq.heappush(heap, (can_time, connected))
+                dq.append(connected)
 
-    # INF가 아닌(감염된) 컴퓨터들의 감염 시간을 모음
-    infected_times = [time for time in dist[1:] if time != INF]
+    infected_times = []
+    for time in dist:
+        if time is not None:
+            infected_times.append(time)
+    #결괏값
     total_infected = len(infected_times)
-    total_time = max(infected_times) if infected_times else 0
-    print(total_infected, total_time)   
+    total_time = max(infected_times)
+    print(total_infected, total_time)        
