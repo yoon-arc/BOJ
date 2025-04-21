@@ -1,13 +1,13 @@
-def lcm(a, b):
-    return int((a * b) / gcd(a, b))
+T = int(input())
 
-def gcd(a, b):
-    if a == 0:
-        return b
-    else:
-        return gcd(b % a, a)
-
-t = int(input())
-for i in range(t):
+# def GCD():
+def GCD(a,b):
+    while b:
+        a, b = b, a % b
+    return a
+    
+for _ in range(T):
     a, b = map(int, input().split())
-    print(lcm(a, b), gcd(a, b))
+    g = GCD(a,b)
+    l = (a*b) // g
+    print(l,g)
