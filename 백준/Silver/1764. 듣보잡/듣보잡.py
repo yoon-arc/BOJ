@@ -1,18 +1,12 @@
+import sys
+input = sys.stdin.readline
 N, M = map(int, input().split())
-people = {}
-ans = []
+N_name, M_name = set(),set()
 for _ in range(N):
-    name = input()
-    people[name] = 1
+    N_name.add(input().strip())
 for _ in range(M):
-    name = input()
-    if name in people :
-        people[name] = 2
-
-for name in people:
-    if people[name] == 2:
-        ans.append(name)
+    M_name.add(input().strip())
+ans = sorted(N_name & M_name)
 print(len(ans))
-ans.sort()
-for n in ans:
-    print(n)
+for i in ans:
+    print(i)
