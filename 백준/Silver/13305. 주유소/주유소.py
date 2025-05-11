@@ -2,14 +2,18 @@
 #최소 비용
 N = int(input())
 roads = list(map(int, input().split()))
-cities = list(map(int, input().split()))
-total = 0
-for i in range(N-1):
-    if cities[i] == min(cities[:-1]):
+fuel = list(map(int, input().split()))
+now = fuel[0]
+total = fuel[0]*roads[0]
+
+for i in range(1,N-1):
+    #현재 주유소가 최저가일 때
+    if fuel[i] == min(fuel):
         for j in range(i, N-1):
-            total += (cities[i]*roads[j])
+            total += fuel[i]*roads[j]
         break
-    else:
-        total += cities[i]*roads[i]
-    
+    #새로운 최저가 주유소 발견
+    if fuel[i] < now:
+        now = fuel[i]
+    total += now*roads[i]
 print(total)
