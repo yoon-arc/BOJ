@@ -1,20 +1,20 @@
-def get_ans(f,s,h):
-    return 1 if (f*(f+1)//2) + (s*(s+1)//2)+ (h*(h+1)//2)==K else 0
+tri = [(i*(i+1))//2 for i in range(1,44)]
 
 T = int(input())
 for _ in range(T):
     ans = 0
     K = int(input())
     
-    for f in range(1,46):
+    for f in tri:
         if ans == 1:
             break
-        for s in range(1,46):
+        for s in tri:
             if ans == 1:
                 break
-            for h in range(1,46):
-                ans = get_ans(f,s,h)
+            for h in tri:
+                if f+s+h == K:
+                    ans = 1 
                 if ans == 1:
                     break
 
-    print(ans)    
+    print(ans) 
