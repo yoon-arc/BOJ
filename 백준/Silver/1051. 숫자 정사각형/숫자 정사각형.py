@@ -1,16 +1,11 @@
-n, m = map(int, input().split())
+N, M = map(int, input().split())
+rect = [list(input().strip()) for _ in range(N)]
+ans = 0
+check = min(N,M)
 
-arr = []
-
-for i in range(n):
-    arr.append(list(input()))
-
-check = min(n, m)
-answer = 0
-for i in range(n):
-    for j in range(m):
-        for k in range(check):
-            if ((i + k) < n) and ((j + k) < m) and (arr[i][j] == arr[i][j + k] == arr[i + k][j] == arr[i + k][j + k]):
-                answer = max(answer, (k + 1)**2)
-                
-print(answer)
+for h in range(N):
+    for y in range(M):
+        for n in range(check):
+            if (h+n)<N and (y+n)<M and rect[h][y] == rect[h][y+n] == rect[h+n][y] == rect[h+n][y+n]:
+                ans = max(ans, ((n+1)**2))
+print(ans)
