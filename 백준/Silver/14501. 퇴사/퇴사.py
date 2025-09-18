@@ -1,16 +1,22 @@
 N = int(input())
-T = [0]*(N+1) #기간
-P = [0]*(N+1) # 비용
-for i in range(1, N+1):
-    t, p = map(int, input().split())
-    T[i], P[i] = t, p
-#dp 테이블    
-dp = [0]*(N+2)
+T = [0]*(N)
+P = [0]*(N)
+for i in range(N):
+    T[i], P[i] =  map(int, input().split())
 
-for i in range(1, N+1):
-    dp[i+1] = max(dp[i+1], dp[i])
-    #갱신
-    check = T[i] + i
-    if check <= N+1:
-        dp[check] = max(dp[i] + P[i] , dp[check])
-print(max(dp))
+
+def dfs(e, amount):
+    global ans
+    #종료 조건
+    if e >= N :
+        ans = max(ans, amount)
+        return ans
+    #만약 다음 날을 더한게 기간(N)을 넘지 않는다면
+    if e + T[e] <= N:
+        dfs(e+T[e], amount+P[e])
+    #스킵
+    dfs(e+1, amount)
+
+ans = 0
+dfs(0, 0)
+print(ans)
