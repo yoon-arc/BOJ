@@ -1,9 +1,10 @@
-import sys
 from collections import Counter
-input = sys.stdin.readline
+import sys
 N = int(input())
-Ndic = Counter(map(int, input().split()))
+Ndic = Counter(map(int, sys.stdin.readline().split()))
 M = int(input())
-Mdic = list(map(int, input().split()))
-for i in Mdic:
-    print(Ndic[i] , end=" ")
+Mlist = map(int, sys.stdin.readline().split())
+
+for i in Mlist:
+    print(Ndic[i], end=" ")
+
