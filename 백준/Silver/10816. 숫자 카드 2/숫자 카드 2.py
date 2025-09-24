@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 N = int(input())
 Nlist = list(map(int, input().split()))
 cards = {}
