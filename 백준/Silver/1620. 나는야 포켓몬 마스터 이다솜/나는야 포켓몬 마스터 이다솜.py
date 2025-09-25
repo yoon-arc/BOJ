@@ -1,15 +1,20 @@
-N, M = map(int, input().split())
-poke_num = {}
-poke_name = {}
+import sys
+input = sys.stdin.readline
 
-for i in range(1,N+1):
-    name = input()
-    poke_num[i] = name
-    poke_name[name] = i
+M, N = map(int, input().split())
+num_to_name = {}
+name_to_num = {}
 
-for i in range(M):
-    now = input()
-    if now.isdigit():
-        print(poke_num[int(now)])
+# 포켓몬 도감 등록
+for i in range(1, M + 1):
+    name = input().rstrip()
+    num_to_name[i] = name
+    name_to_num[name] = i
+
+# 문제 출력
+for _ in range(N):
+    query = input().rstrip()
+    if query.isdigit():
+        print(num_to_name[int(query)])
     else:
-        print(poke_name[now])
+        print(name_to_num[query])
