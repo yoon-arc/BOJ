@@ -1,33 +1,29 @@
+import sys
+input = sys.stdin.readline
 N, M = map(int, input().split())
-graph = [ [] for _ in range(N + 1)]
-visited = [False for _ in range(N + 1)]
-times = 0
+#노드
+node = [ [] for _ in range(N+1)]
+#방문 확인
+visited = [False]*(N+1)
+count = 0
+#입력
+for _ in range(M):
+    a, b = map(int, input().split())
+    node[a].append(b)
+    node[b].append(a)
 
+def dfs(s):
+    stack = [s]
+    visited[s] = True
+    while stack:
+        now = stack.pop()
+        for nxt in node[now]:
+            if not visited[nxt]:
+                visited[nxt] = True
+                stack.append(nxt)
 
-for i in range(M):
-    u, v = map(int, input().split())
-    graph[u].append(v)
-    graph[v].append(u)
-
-
-
-def dfs(start_node):
-    for i in graph[start_node]:
-        if visited[i] == False:
-            visited[i] = True
-            dfs(i)
-
-
-for i in range(1, N + 1):
-    if visited[i] == False:
-        times += 1
+for i in range(1, N+1):
+    if not visited[i]:
+        count += 1
         dfs(i)
-       
-        
-
-
-
-start_node = 1
-visited[start_node] = True
-dfs(start_node)
-print(times)
+print(count)
