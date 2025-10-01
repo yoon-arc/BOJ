@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 T = int(input())
 dh, dy = [-1,0,1,0],[0,1,0,-1]
 #함수(범위 검사, bfs)
