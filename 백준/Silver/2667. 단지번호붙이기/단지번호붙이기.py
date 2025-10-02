@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 N = int(input())
 apts = [list(map(int, input().strip())) for _ in range(N)]
 visited = [[0]*N for _ in range(N)]
@@ -32,7 +34,6 @@ for h in range(N):
         if apts[h][y] == 1 and visited[h][y] == 0:
             bfs(h,y)
 
-# print(bfs)
 nums.sort()
 print(len(nums))
 for i in nums:
